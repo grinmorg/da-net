@@ -4,6 +4,7 @@ import './globals.css'
 import Nav from '@/components/nav'
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/components/theme-provider'
+import Script from 'next/script'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -22,6 +23,23 @@ export default function RootLayout({
     <ViewTransitions>
       <html suppressHydrationWarning lang="ru">
         <body className={montserrat.className}>
+          {/* Analytics */}
+          <Script id="metrika-counter" strategy="afterInteractive">
+            {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        
+            ym(101430517, "init", {
+                  defer: true,
+                  clickmap:true,
+                  trackLinks:true,
+                  accurateTrackBounce:true,
+                  webvisor:true
+            });`}
+          </Script>
+
           <ThemeProvider attribute="class" disableTransitionOnChange>
             <Nav />
             <main className="text-foreground mx-auto max-w-[1280px] px-5 pt-28 pb-10">
