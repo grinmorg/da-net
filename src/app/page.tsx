@@ -54,7 +54,7 @@ const ITEMS: {
 export default function Home() {
   return (
     <div>
-      <h1 className="font-heading mb-8 text-2xl sm:text-4xl">Игры</h1>
+      <h1 className="font-heading mb-8 text-2xl sm:text-4xl">Список игр</h1>
 
       <div className="grid gap-5 sm:grid-cols-2">
         {ITEMS.map((project, id) => {
