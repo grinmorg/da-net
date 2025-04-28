@@ -18,7 +18,7 @@ const ITEMS: {
     name: 'Монетка',
     description:
       'Не можешь выбрать, кто моет посуду или кому идти за пиццей? Доверь свою судьбу древнейшему оракулу — монетке! Просто кликни, и она решит за тебя (но если результат не нравится, можно кинуть ещё раз... и ещё... пока не выпадет нужное)',
-    link: '/games/coinflip',
+    link: '/games/coinflip/',
     previewImage: '/project1.png',
     inDev: false,
   },
@@ -44,10 +44,10 @@ const ITEMS: {
     name: 'Какой фильм посмотреть? (Кинорулетка)',
     description:
       'Два часа споров о том, какой фильм включить? Загрузи свой список (или доверься нашему) — и пусть рандом решит за вас. Если выпадет «Титаник», а компания взвоет — виноват не ты, а алгоритм!',
-    link: '/games/',
+    link: '/games/kinoruletka/',
 
     previewImage: '/project4.png',
-    inDev: true,
+    inDev: false,
   },
 ]
 
@@ -72,22 +72,25 @@ export default function Home() {
                   В разработке
                 </Badge>
               )}
-
-              <AspectRatio
-                className="border-border shadow-shadow rounded-base -bottom-[2px]! border-2"
-                ratio={71 / 26}
-              >
-                <img
-                  className="rounded-base w-full"
-                  src={`${project.previewImage}`}
-                  alt={project.name}
-                />
-              </AspectRatio>
+              <Link href={project.link}>
+                <AspectRatio
+                  className="border-border shadow-shadow rounded-base -bottom-[2px]! border-2"
+                  ratio={71 / 26}
+                >
+                  <img
+                    className="rounded-base w-full"
+                    src={`${project.previewImage}`}
+                    alt={project.name}
+                  />
+                </AspectRatio>
+              </Link>
 
               <div className="text-main-foreground font-base mt-5 flex min-h-[220px] flex-col">
-                <h2 className="font-heading text-xl sm:text-2xl">
-                  {project.name}
-                </h2>
+                <Link href={project.link}>
+                  <h2 className="font-heading text-xl sm:text-2xl">
+                    {project.name}
+                  </h2>
+                </Link>
 
                 <p className="mt-2 mb-auto">{project.description}</p>
 
