@@ -26,10 +26,10 @@ const ITEMS: {
     name: 'Кубик',
     description:
       'Нужно решить спор или выбрать число от 1 до 6? Виртуальный кубик всегда под рукой! Брось его и прими результат как истину в последней инстанции.',
-    link: '/games/',
+    link: '/games/dice',
 
     previewImage: '/project2.png',
-    inDev: true,
+    inDev: false,
   },
   {
     name: 'Генератор случайных чисел (От 1 до...)',
@@ -76,21 +76,25 @@ export default function Home() {
                 </Badge>
               )}
 
-              <AspectRatio
-                className="border-border shadow-shadow rounded-base -bottom-[2px]! border-2"
-                ratio={71 / 26}
-              >
-                <img
-                  className="rounded-base h-full w-full object-contain"
-                  src={`${project.previewImage}`}
-                  alt={project.name}
-                />
-              </AspectRatio>
+              <Link href={project.link}>
+                <AspectRatio
+                  className="border-border shadow-shadow rounded-base -bottom-[2px]! border-2"
+                  ratio={71 / 26}
+                >
+                  <img
+                    className="rounded-base h-full w-full object-contain"
+                    src={`${project.previewImage}`}
+                    alt={project.name}
+                  />
+                </AspectRatio>
+              </Link>
 
               <div className="text-main-foreground font-base mt-5 flex min-h-[220px] flex-col">
-                <h2 className="font-heading text-xl sm:text-2xl">
-                  {project.name}
-                </h2>
+                <Link href={project.link}>
+                  <h2 className="font-heading text-xl sm:text-2xl">
+                    {project.name}
+                  </h2>
+                </Link>
 
                 <p className="mt-2 mb-auto">{project.description}</p>
 
@@ -114,7 +118,9 @@ export default function Home() {
                       trigger={<Button variant="destructive">Шлак?</Button>}
                       footer={
                         <DialogFooter>
-                          <Button variant="default">Да, лучше убрать</Button>
+                          <DialogClose asChild>
+                            <Button variant="default">Да, лучше убрать</Button>
+                          </DialogClose>
                           <DialogClose asChild>
                             <Button variant="neutral">Отмена</Button>
                           </DialogClose>
