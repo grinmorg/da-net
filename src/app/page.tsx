@@ -68,7 +68,10 @@ export default function Home() {
             >
               {/* Бейдж "В разработке" */}
               {project.inDev && (
-                <Badge variant="neutral" className="absolute top-6 right-6">
+                <Badge
+                  variant="neutral"
+                  className="absolute top-6 right-6 z-10"
+                >
                   В разработке
                 </Badge>
               )}
@@ -78,7 +81,7 @@ export default function Home() {
                 ratio={71 / 26}
               >
                 <img
-                  className="rounded-base w-full"
+                  className="rounded-base h-full w-full object-contain"
                   src={`${project.previewImage}`}
                   alt={project.name}
                 />
