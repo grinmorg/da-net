@@ -11,11 +11,11 @@ export default function Nav() {
   const links = [
     {
       path: '/',
-      text: 'Игры',
+      text: 'Рандом игры',
     },
     {
-      path: '/about',
-      text: 'О нас',
+      path: '/quizzes',
+      text: 'Квизы',
     },
   ]
 
