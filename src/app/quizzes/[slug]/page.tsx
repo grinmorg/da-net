@@ -9,7 +9,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const quiz = await quizService.getQuizBySlug(params.slug)
+  const { slug } = await params
+  const quiz = await quizService.getQuizBySlug(slug)
   if (!quiz) return {}
 
   const seoBlock = quiz.blocks.find((b) => b.__component === 'shared.seo')
@@ -32,7 +33,9 @@ export default async function QuizPage({
 }: {
   params: { slug: string }
 }) {
-  const quiz = await quizService.getQuizBySlug(params.slug)
+  const { slug } = await params
+
+  const quiz = await quizService.getQuizBySlug(slug)
   if (!quiz) return notFound()
 
   return (

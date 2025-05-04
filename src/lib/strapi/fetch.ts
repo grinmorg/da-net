@@ -1,3 +1,5 @@
+import { STRAPI_BASE_URL } from '../constants'
+
 type FetchOptions = {
   pagination?: {
     page?: number
@@ -12,10 +14,33 @@ export async function fetchFromStrapi<T>(
   endpoint: string,
   options: FetchOptions = {},
 ): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'https://admin.da-net.fun'
-  const url = new URL(`/api${endpoint}`, baseUrl)
+  const url = new URL(`/api${endpoint}`, STRAPI_BASE_URL)
 
-  // Добавляем параметры пагинации
+  // Улучшенная обработка populate для Strapi v5
+  if (options.populate) {
+    if (Array.isArray(options.populate)) {
+      options.populate.forEach((field, index) => {
+        url.searchParams.append(`populate[${index}]`, field)
+      })
+    } else if (typeof options.populate === 'string') {
+      url.searchParams.append('populate', options.populate)
+    }
+  }
+
+  // Фильтрация
+  if (options.filters) {
+    Object.entries(options.filters).forEach(([key, value]) => {
+      if (typeof value === 'object' && value !== null) {
+        Object.entries(value).forEach(([operator, val]) => {
+          url.searchParams.append(`filters[${key}][${operator}]`, String(val))
+        })
+      } else {
+        url.searchParams.append(`filters[${key}]`, String(value))
+      }
+    })
+  }
+
+  // Остальные параметры (пагинация, сортировка)
   if (options.pagination) {
     url.searchParams.append(
       'pagination[page]',
@@ -27,22 +52,6 @@ export async function fetchFromStrapi<T>(
     )
   }
 
-  // Добавляем параметры populate
-  if (options.populate) {
-    const populateValue = Array.isArray(options.populate)
-      ? options.populate.join(',')
-      : options.populate
-    url.searchParams.append('populate', populateValue)
-  }
-
-  // Добавляем фильтры
-  if (options.filters) {
-    Object.entries(options.filters).forEach(([key, value]) => {
-      url.searchParams.append(`filters[${key}]`, String(value))
-    })
-  }
-
-  // Добавляем сортировку
   if (options.sort) {
     const sortValue = Array.isArray(options.sort)
       ? options.sort.join(',')
@@ -51,10 +60,6 @@ export async function fetchFromStrapi<T>(
   }
 
   const res = await fetch(url.toString())
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${endpoint}`)
-  }
-
+  if (!res.ok) throw new Error(`Failed to fetch ${url.toString()}`)
   return await res.json()
 }

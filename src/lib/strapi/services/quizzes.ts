@@ -18,7 +18,7 @@ export type Result = {
   content: RichBlocksContent[]
 }
 
-type Quiz = {
+export type Quiz = {
   id: number
   documentId: string
   title: string
@@ -56,8 +56,8 @@ export const quizService = {
   getQuizBySlug: async (slug: string): Promise<Quiz | null> => {
     try {
       const res = fetchFromStrapi<QuizzesResponse>('/quizzes', {
-        pagination: { page: 1, pageSize: 1 },
-        populate: ['cover', 'blocks', 'results', 'tag', 'questions.answers'],
+        filters: { slug: { $eq: slug } }, // Добавляем фильтр по slug
+        populate: ['cover', 'blocks', 'results', 'questions.answers'],
       })
       const { data } = await res
       return data.length > 0 ? data[0] : null
