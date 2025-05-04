@@ -7,7 +7,7 @@ import { quizService } from '@/lib/strapi/services/quizzes'
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
   const quiz = await quizService.getQuizBySlug(slug)
@@ -31,7 +31,7 @@ export async function generateMetadata({
 export default async function QuizPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
 

@@ -18,9 +18,10 @@ import { quizService } from '@/lib/strapi/services/quizzes'
 export default async function QuizzesPage({
   searchParams,
 }: {
-  searchParams: { page?: string }
+  searchParams: Promise<{ page?: string }>
 }) {
-  const currentPage = Number(searchParams.page) || 1
+  const { page } = await searchParams
+  const currentPage = Number() || 1
   const { data: quizzes, meta } = await quizService.getQuizzes(currentPage)
   const { pagination } = meta
 
