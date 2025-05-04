@@ -33,36 +33,38 @@ export function QuizGame({
   if (showResult) {
     const result = getResult()
     return (
-      <div className="rounded-lg p-6">
-        {result?.content.map(
-          (
-            block: { type: string; children: any[] },
-            index: Key | null | undefined,
-          ) => (
-            <div key={index} className="mb-4">
-              {block.type === 'heading' && (
-                <h2 className={`mb-2 text-2xl font-bold`}>
-                  {block.children[0].text}
-                </h2>
-              )}
-              {block.type === 'paragraph' && (
-                <p className="text-lg">
-                  {block.children.map((child, i) => {
-                    let className = ''
-                    if (child.bold) className += 'font-bold '
-                    if (child.underline) className += 'underline '
-                    return (
-                      <span key={i} className={className}>
-                        {child.text}
-                      </span>
-                    )
-                  })}
-                </p>
-              )}
-            </div>
-          ),
-        )}
-      </div>
+      <Card>
+        <CardContent>
+          {result?.content.map(
+            (
+              block: { type: string; children: any[] },
+              index: Key | null | undefined,
+            ) => (
+              <div key={index} className="mb-4">
+                {block.type === 'heading' && (
+                  <h2 className={`mb-2 text-2xl font-bold`}>
+                    {block.children[0].text}
+                  </h2>
+                )}
+                {block.type === 'paragraph' && (
+                  <p className="text-lg">
+                    {block.children.map((child, i) => {
+                      let className = ''
+                      if (child.bold) className += 'font-bold '
+                      if (child.underline) className += 'underline '
+                      return (
+                        <span key={i} className={className}>
+                          {child.text}
+                        </span>
+                      )
+                    })}
+                  </p>
+                )}
+              </div>
+            ),
+          )}
+        </CardContent>
+      </Card>
     )
   }
 
