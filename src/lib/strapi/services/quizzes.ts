@@ -7,7 +7,6 @@ export type Question = {
   answers?: {
     id: number
     text: string
-    points: number
   }[]
 }
 
@@ -15,7 +14,7 @@ export type Result = {
   id: number
   from: number
   to: number
-  content: RichBlocksContent[]
+  content: string
 }
 
 export type Quiz = {
