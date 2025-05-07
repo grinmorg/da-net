@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { QuizGame } from './_components/quiz-game'
 import { quizService } from '@/lib/strapi/services/quizzes'
+import { getSiteTitle } from '@/lib/utils'
 
 export async function generateMetadata({
   params,
@@ -18,7 +19,7 @@ export async function generateMetadata({
   const imageUrl = quiz.cover.formats.medium?.url || quiz.cover.url
 
   return {
-    title: seoBlock?.metaTitle || quiz.title,
+    title: getSiteTitle(seoBlock?.metaTitle || quiz.title),
     description: seoBlock?.metaDescription || quiz.description,
     openGraph: {
       title: seoBlock?.metaTitle || quiz.title,

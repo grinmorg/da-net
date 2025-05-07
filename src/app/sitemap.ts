@@ -31,13 +31,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/tests`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
     // Добавьте другие статические страницы
   ]
 
   // Динамические страницы квизов
   const quizzes = await fetchQuizzesForSitemap()
   const dynamicPages = quizzes.map((quiz: Quiz) => ({
-    url: `${baseUrl}/quizzes/${quiz.slug}`,
+    url: `${baseUrl}/tests/${quiz.slug}`,
     lastModified: new Date(quiz.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,

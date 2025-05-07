@@ -5,11 +5,12 @@ import Nav from '@/components/nav'
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/components/theme-provider'
 import Script from 'next/script'
+import { getSiteTitle } from '@/lib/utils'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Da/net - сделай свой выбор',
+  title: getSiteTitle('сделай свой выбор'),
   description:
     'Не можете принять решение? Мы поможем! На нашем сайте собраны лучшие инструменты для рандомного выбора: монетка (орёл/решка), колесо фортуны с настраиваемыми вариантами, виртуальный кубик, генератор случайных чисел и кинорулетка. Просто, весело, без ответственности!',
 }

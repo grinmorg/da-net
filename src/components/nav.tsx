@@ -14,8 +14,8 @@ export default function Nav() {
       text: 'Рандом игры',
     },
     {
-      path: '/quizzes',
-      text: 'Квизы',
+      path: '/tests',
+      text: 'Тесты',
     },
   ]
 

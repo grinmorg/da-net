@@ -3,7 +3,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Button } from '@/components/ui/button'
 import { DialogClose, DialogFooter } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
-import { cn } from '@/lib/utils'
+import { cn, getSiteTitle } from '@/lib/utils'
 import Link from 'next/link'
 import {
   Pagination,
@@ -14,6 +14,13 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import { quizService } from '@/lib/strapi/services/quizzes'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: getSiteTitle('тесты с вариантами ответов'),
+  description:
+    'На нашем сайте ты можешь проходить увлекательные тесты на разные темы. Проверяй свои знания, соревнуйся с друзьями или создавай собственные тесты!',
+}
 
 export default async function QuizzesPage({
   searchParams,
@@ -27,7 +34,7 @@ export default async function QuizzesPage({
 
   return (
     <div>
-      <h1 className="font-heading mb-8 text-2xl sm:text-4xl">Список квизов</h1>
+      <h1 className="font-heading mb-8 text-2xl sm:text-4xl">Список тестов</h1>
 
       <div className="grid gap-5 sm:grid-cols-2">
         {quizzes.map((quiz) => {
@@ -41,7 +48,7 @@ export default async function QuizzesPage({
               )}
               key={quiz.id}
             >
-              <Link href={`/quizzes/${slug}`}>
+              <Link href={`/tests/${slug}`}>
                 <AspectRatio
                   className="border-border shadow-shadow rounded-base -bottom-[2px]! border-2"
                   ratio={71 / 26}
@@ -55,7 +62,7 @@ export default async function QuizzesPage({
               </Link>
 
               <div className="text-main-foreground font-base mt-5 flex min-h-[220px] flex-col">
-                <Link href={`/quizzes/${slug}`}>
+                <Link href={`/tests/${slug}`}>
                   <h2 className="font-heading text-xl sm:text-2xl">{title}</h2>
                 </Link>
 
@@ -63,7 +70,7 @@ export default async function QuizzesPage({
 
                 <div className="mt-8 grid grid-cols-2 gap-5">
                   <Button asChild variant="neutral">
-                    <Link href={`/quizzes/${slug}`}>Погнали</Link>
+                    <Link href={`/tests/${slug}`}>Погнали</Link>
                   </Button>
                   <CustomDialog
                     title="Вы считаете что данный квиз тут лишний?"
