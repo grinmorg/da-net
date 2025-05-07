@@ -42,7 +42,7 @@ export default function RootLayout({
 
           <ThemeProvider attribute="class" disableTransitionOnChange>
             <Nav />
-            <main className="text-foreground mx-auto max-w-[1280px] px-5 pt-28 pb-10">
+            <main className="text-foreground mx-auto max-w-[1280px] pt-28 pb-10 sm:px-5">
               {children}
             </main>
           </ThemeProvider>
