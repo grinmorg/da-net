@@ -115,7 +115,9 @@ export default function Home() {
                     <CustomDialog
                       title="Вы считаете что данная игра тут лишняя?"
                       description="Ваш голос поможет сделать проект чуточку лучше"
-                      trigger={<Button variant="destructive">Шлак?</Button>}
+                      trigger={
+                        <Button variant="destructive">Не нравится</Button>
+                      }
                       footer={
                         <DialogFooter>
                           <DialogClose asChild>
