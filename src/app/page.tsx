@@ -89,14 +89,16 @@ export default function Home() {
                 </AspectRatio>
               </Link>
 
-              <div className="text-main-foreground font-base mt-5 flex min-h-[220px] flex-col">
+              <div className="font-base mt-5 flex min-h-[220px] flex-col">
                 <Link href={project.link}>
                   <h2 className="font-heading text-xl sm:text-2xl">
                     {project.name}
                   </h2>
                 </Link>
 
-                <p className="mt-2 mb-auto">{project.description}</p>
+                <p className="font-caveat mt-2 mb-auto text-xl dark:text-[#A8B4C2]">
+                  {project.description}
+                </p>
 
                 <div className="mt-8 grid grid-cols-2 gap-5">
                   <Button

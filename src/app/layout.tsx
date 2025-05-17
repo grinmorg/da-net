@@ -1,13 +1,20 @@
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Oswald, Caveat } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/nav'
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from '@/components/theme-provider'
 import Script from 'next/script'
-import { getSiteTitle } from '@/lib/utils'
+import { cn, getSiteTitle } from '@/lib/utils'
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const oswaldFont = Oswald({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-oswald',
+})
+const caveatFont = Caveat({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-caveat',
+})
 
 export const metadata: Metadata = {
   title: getSiteTitle('сделай свой выбор'),
@@ -23,7 +30,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html suppressHydrationWarning lang="ru">
-        <body className={montserrat.className}>
+        <body className={cn(caveatFont.variable, oswaldFont.variable)}>
           {/* Analytics */}
           <Script id="metrika-counter" strategy="afterInteractive">
             {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -42,7 +49,7 @@ export default function RootLayout({
 
           <ThemeProvider attribute="class" disableTransitionOnChange>
             <Nav />
-            <main className="text-foreground mx-auto max-w-[1280px] pt-28 pb-10 sm:px-5">
+            <main className="text-foreground font-oswald mx-auto max-w-[1280px] pt-28 pb-10 sm:px-5">
               {children}
             </main>
           </ThemeProvider>
